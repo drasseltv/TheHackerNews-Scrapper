@@ -1,8 +1,14 @@
+from pathlib import Path  # python3 only
+from dotenv import load_dotenv
 from pymongo import MongoClient
 import pymongo
 from bs4 import BeautifulSoup
 import requests
 import ssl
+import os
+
+USERNAME = "admin"
+PASSWORD = "top_secret"
 
 data = requests.get("https://thehackernews.com/")
 soupx = BeautifulSoup(data.text, 'html.parser')
@@ -14,9 +20,10 @@ descriptions = []
 published = []
 authors = []
 
+
 try:
     my_cluster = MongoClient(
-        "mongodb+srv://admin:top_secret@scrapx-oib7y.mongodb.net/test?retryWrites=true&w=majority", ssl_cert_reqs=ssl.CERT_NONE)
+        "mongodb+srv://"+USERNAME+":"+PASSWORD+"@scrapx-oib7y.mongodb.net/test?retryWrites=true&w=majority", ssl_cert_reqs=ssl.CERT_NONE)
 except pymongo.errors.ConnectionFailure as e:
     print("MongoDB couldnt be connected  \n" + e)
 
