@@ -97,4 +97,4 @@ if __name__ == '__main__':
     for _ in range(500):
         url = extract_n_collect(url)
         #print(url)
-    
+    print("Extraction Completed!")
